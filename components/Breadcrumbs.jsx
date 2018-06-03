@@ -32,23 +32,50 @@ function Breadcrumbs() {
   return (
     <BreadcrumbsArea>
       <BreadcrumbsList>
-        <li><Link href="/introduction">Introduction</Link></li>
+        <li>
+          <Link href="/introduction">
+            <a>Introduction</a></Link>
+        </li>
         <li>></li>
-        <li><Link href="/authorship">Authorship</Link></li>
+        <li>
+          <Link href="/authorship">
+            <a>Authorship</a></Link>
+        </li>
         <li>></li>
-        <li><Link href="/copyright">Copyright</Link></li>
+        <li>
+          <Link href="/copyright">
+            <a>Copyright</a></Link>
+        </li>
         <li>></li>
-        <li><Link href="/plagiarism">Plagiarism</Link></li>
+        <li>
+          <Link href="/plagiarism">
+            <a>Plagiarism</a></Link>
+        </li>
         <li>></li>
-        <li><Link href="/agreement">Agreement</Link></li>
+        <li>
+          <Link href="/agreement">
+            <a>Agreement</a></Link>
+        </li>
         <li>></li>
-        <li><Link href="/payment">Payment</Link></li>
+        <li>
+          <Link href="/payment">
+            <a>Payment</a></Link>
+        </li>
         <li>></li>
-        <li><Link href="/deadline">Deadline</Link></li>
+        <li>
+          <Link href="/deadline">
+            <a>Deadline</a></Link>
+        </li>
         <li>></li>
-        <li><Link href="/process">Process</Link></li>
+        <li>
+          <Link href="/process">
+            <a>Process</a></Link>
+        </li>
         <li>></li>
-        <li><Link href="/sample">Sample</Link></li>
+        <li>
+          <Link href="/sample">
+            <a>Sample</a></Link>
+        </li>
       </BreadcrumbsList>
     </BreadcrumbsArea>
   );
