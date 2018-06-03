@@ -43,11 +43,7 @@ class App extends Component {
 
   async componentDidMount() {
     this.auth0Client.subscribe(async (auth) => {
-      if (auth) {
-        Router.push('/authorship');
-      } else {
-        await this.auth0Client.checkSession();
-      }
+      await this.auth0Client.checkSession();
     });
     await this.auth0Client.checkSession();
   }
