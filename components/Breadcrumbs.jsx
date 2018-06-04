@@ -13,6 +13,8 @@ const BreadcrumbsList = styled.ul`
   font-size: 12px;
   padding-left: 0;
   text-align: center;
+  max-width: 770px;
+  overflow-x: scroll;
   
   > li {
     display: inline;

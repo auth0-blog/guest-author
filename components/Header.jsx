@@ -8,7 +8,7 @@ export default styled.div`
   h1 {
     color: #cacccc;
     font-weight: normal;
-    font-size: 23px;
+    font-size: 20px;
   }
   
   > div {

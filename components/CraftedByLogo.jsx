@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const LogoContainer = styled.div`
   > img {
-    max-width: 90px;
-    margin-top: 19px;
+    max-width: 80px;
+    margin-top: 15px;
   }
 `;
 
