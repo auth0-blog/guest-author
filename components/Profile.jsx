@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {withRouter} from 'next/router'
+import {withRouter} from 'next/router';
 import ContainerArea from './ContentArea';
 import Card from './Card';
 import {DefaultButton} from './Buttons';

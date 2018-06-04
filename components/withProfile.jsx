@@ -1,5 +1,6 @@
 import Auth0Web from 'auth0-web';
-import React, {Component} from 'react';
+import {withRouter} from 'next/router';
+import React from 'react';
 import DevConfig from '../config/development.env';
 import ProdConfig from '../config/production.env';
 
@@ -14,40 +15,44 @@ const auth0Client = new Auth0Web({
   scope: 'openid profile',
 });
 
-class WithProfileWrapper extends Component {
-  constructor(props) {
-    super(props);
+export default (WrappedComponent) => {
+  return withRouter(class extends React.Component {
+    constructor(props) {
+      super(props);
 
-    this.state = {
-      authenticated: false,
-      profile: null,
-    };
-
-    auth0Client.subscribe((authenticated) => {
+      const authenticated = auth0Client.isAuthenticated();
       const profile = authenticated ? auth0Client.getProfile() : null;
 
-      this.setState({
+      this.state = {
         authenticated,
         profile,
+      };
+
+      auth0Client.subscribe((authenticated) => {
+        console.log('how are you', authenticated);
+
+        const profile = authenticated ? auth0Client.getProfile() : null;
+
+        this.setState({
+          authenticated,
+          profile,
+        });
+
+        props.router.push('/introduction');
       });
-    });
-  }
+    }
 
-  render() {
-    const {authenticated, profile} = this.state;
-    const WrappedComponent = this.props.wrappedComponent;
-    return (
-      <WrappedComponent
-        auth0Client={auth0Client}
-        authenticated={authenticated}
-        profile={profile}
-      />
-    )
-  }
-}
-
-export default (WrappedComponent) => {
-  return (
-    <WithProfileWrapper wrappedComponent={WrappedComponent} />
-  )
+    render() {
+      const {authenticated, profile} = this.state;
+      return (
+        <WrappedComponent
+          auth0Client={auth0Client}
+          authenticated={authenticated}
+          profile={profile}
+        >
+          {this.props.children}
+        </WrappedComponent>
+      )
+    }
+  });
 };

@@ -9,6 +9,7 @@ import Header from '../components/Header';
 import DevConfig from '../config/development.env';
 import ProdConfig from '../config/production.env';
 import OnboardClient from '../services/OnboardClient';
+import withProfile from "./withProfile";
 
 class App extends Component {
   constructor(props) {
@@ -16,18 +17,9 @@ class App extends Component {
 
     const config = process.env.NODE_ENV === 'production' ? ProdConfig : DevConfig;
 
-    this.auth0Client = new Auth0Web({
-      audience: config.audience,
-      domain: config.domain,
-      clientID: config.clientID,
-      redirectUri: config.redirectUri,
-      responseType: 'token id_token',
-      scope: 'openid profile',
-    });
-
     this.onboardClient = new OnboardClient(
       'https://wt-0d41b47a3e54aad29a36abfdd5ef87ea-0.sandbox.auth0-extend.com/guest-author-program-dev',
-      this.auth0Client,
+      props.auth0Client,
     );
 
     this.moveForward = this.moveForward.bind(this);
@@ -42,10 +34,15 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    this.auth0Client.subscribe(async (auth) => {
-      await this.auth0Client.checkSession();
+    this.props.auth0Client.subscribe(async (auth) => {
+      if (!auth) {
+        await this.props.auth0Client.checkSession();
+      }
     });
-    await this.auth0Client.checkSession();
+
+    if (this.props.authenticated) return;
+
+    await this.props.auth0Client.checkSession();
   }
 
   toggleCopyright() {
@@ -73,14 +70,12 @@ class App extends Component {
     const currentPosition = this.pagesOrder.indexOf(pathname.replace(process.env.PUBLIC_URL, ''));
     if (currentPosition === this.pagesOrder - 1) return;
 
-    console.log(this.pagesOrder[currentPosition + 1]);
-
     this.props.history.push(`${this.pagesOrder[currentPosition + 1]}`);
   }
 
   submitSample(sample) {
-    if (!this.auth0Client.isAuthenticated()) return;
-    const { name, email } = this.auth0Client.getProfile();
+    if (!this.props.authenticated) return;
+    const { name, email } = this.props.profile;
     this.onboardClient.submitSample({ name, email, sample });
   }
 
@@ -100,4 +95,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default withProfile(withRouter(App));

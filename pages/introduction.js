@@ -1,24 +1,21 @@
 import AppLayout from '../components/AppLayout'
 import Presentation from '../components/Presentation';
 import Profile from '../components/Profile';
+import withProfile from '../components/withProfile';
 
 function introduction(props) {
-  const auth0Client = {
-    isAuthenticated: () => { return false },
-    signIn: () => {},
-  };
   return (
     <AppLayout>
       <Profile
-        authenticated={false}
-        auth0Client={auth0Client}
-        profile={null}
+        authenticated={props.authenticated}
+        auth0Client={props.auth0Client}
+        profile={props.profile}
       />
       <Presentation
         title="Introduction"
         actionLabel="Sign In"
-        action={auth0Client.signIn}
-        auth0Client={auth0Client}
+        action={() => {props.auth0Client.signIn()}}
+        auth0Client={props.auth0Client}
       >
         <p>
           The present website exists to support the Auth0 Guest Author Program.
@@ -29,4 +26,4 @@ function introduction(props) {
   );
 }
 
-export default introduction;
+export default withProfile(introduction);

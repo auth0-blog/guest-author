@@ -39,7 +39,7 @@ Presentation.propTypes = {
   cancel: PropTypes.func,
   cancelLabel: PropTypes.string,
   title: PropTypes.string.isRequired,
-  auth0Client: PropTypes.object,
+  auth0Client: PropTypes.function,
 };
 
 export default Presentation;
