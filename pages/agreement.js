@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import AppLayout from '../components/AppLayout';
 import Presentation from '../components/Presentation';
+import Profile from '../components/Profile';
+import withProfile from '../components/withProfile';
 
 const AgreementContainer = styled.section`
   label {
@@ -46,11 +48,15 @@ const AgreementContainer = styled.section`
 function Authorship(props) {
   return (
     <AppLayout>
+      <Profile
+        authenticated={props.authenticated}
+        auth0Client={props.auth0Client}
+        profile={props.profile}
+      />
       <AgreementContainer>
         <Presentation
           action={() => {}}
           actionLabel="I Agree"
-          auth0Client={{}}
           cancel={() => {}}
           cancelLabel="Step Back"
           title="Agreement"
@@ -77,4 +83,4 @@ function Authorship(props) {
   );
 }
 
-export default Authorship;
+export default withProfile(Authorship);

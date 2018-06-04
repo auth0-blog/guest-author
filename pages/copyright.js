@@ -1,10 +1,17 @@
 import React from 'react';
 import AppLayout from '../components/AppLayout';
 import Presentation from '../components/Presentation';
+import Profile from '../components/Profile';
+import withProfile from '../components/withProfile';
 
-function Copyright() {
+function Copyright(props) {
   return (
     <AppLayout>
+      <Profile
+        authenticated={props.authenticated}
+        auth0Client={props.auth0Client}
+        profile={props.profile}
+      />
       <Presentation
         restricted
         action={() => {}}
@@ -12,7 +19,6 @@ function Copyright() {
         title="Copyright"
         cancel={() => {}}
         cancelLabel="Step Back"
-        auth0Client={{}}
       >
         <p>
           Having the authorship subject clearly understood, the second most important topic is regarding copyright of
@@ -39,4 +45,4 @@ function Copyright() {
   )
 }
 
-export default Copyright;
+export default withProfile(Copyright);

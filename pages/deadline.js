@@ -1,16 +1,22 @@
 import React from 'react';
 import AppLayout from '../components/AppLayout';
 import Presentation from '../components/Presentation';
+import Profile from '../components/Profile';
+import withProfile from '../components/withProfile';
 
-function Authorship() {
+function Authorship(props) {
   return (
     <AppLayout>
+      <Profile
+        authenticated={props.authenticated}
+        auth0Client={props.auth0Client}
+        profile={props.profile}
+      />
       <Presentation
         restricted
         title="Deadline"
         action={() => {}}
         actionLabel="I Agree"
-        auth0Client={() => {}}
       >
         <p>
           A frequently asked question is if there is a deadline for the process. The short answer is: no, the process
@@ -27,4 +33,4 @@ function Authorship() {
   );
 }
 
-export default Authorship;
+export default withProfile(Authorship);

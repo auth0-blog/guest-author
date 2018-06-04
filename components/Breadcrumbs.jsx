@@ -33,7 +33,7 @@ function Breadcrumbs() {
     <BreadcrumbsArea>
       <BreadcrumbsList>
         <li>
-          <Link href="/introduction">
+          <Link href="/">
             <a>Introduction</a></Link>
         </li>
         <li>></li>

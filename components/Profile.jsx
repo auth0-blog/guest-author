@@ -25,7 +25,6 @@ const ProfileCard = Card.extend`
 function Profile(props) {
   const signOut = () => {
     props.auth0Client.signOut();
-    props.router.push('/');
   };
 
   return (

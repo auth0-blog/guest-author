@@ -25,7 +25,7 @@ class App extends Component {
     this.moveForward = this.moveForward.bind(this);
     this.stepBack = this.stepBack.bind(this);
     this.submitSample = this.submitSample.bind(this);
-    this.pagesOrder = ['/introduction', '/authorship', '/copyright', '/plagiarism', '/agreement', '/payment', '/deadline', '/process', '/sample'];
+    this.pagesOrder = ['/', '/authorship', '/copyright', '/plagiarism', '/agreement', '/payment', '/deadline', '/process', '/sample'];
 
     this.state = {
       agreeCopyright: false,

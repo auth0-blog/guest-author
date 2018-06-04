@@ -1,16 +1,22 @@
 import React from 'react';
 import AppLayout from '../components/AppLayout';
 import Presentation from '../components/Presentation';
+import Profile from '../components/Profile';
+import withProfile from '../components/withProfile';
 
-function Authorship() {
+function Authorship(props) {
   return (
     <AppLayout>
+      <Profile
+        authenticated={props.authenticated}
+        auth0Client={props.auth0Client}
+        profile={props.profile}
+      />
       <Presentation
         restricted
         title="Authorship"
         action={() => {}}
         actionLabel="I Agree"
-        auth0Client={() => {}}
       >
         <p>
           First and foremost, Auth0 wants to make clear to authors that we will never decline <strong>your moral rights as an author</strong>.
@@ -26,4 +32,4 @@ function Authorship() {
   );
 }
 
-export default Authorship;
+export default withProfile(Authorship);

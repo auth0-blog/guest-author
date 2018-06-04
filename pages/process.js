@@ -1,16 +1,22 @@
 import React from 'react';
 import AppLayout from '../components/AppLayout';
 import Presentation from '../components/Presentation';
+import Profile from '../components/Profile';
+import withProfile from '../components/withProfile';
 
-function Authorship() {
+function Authorship(props) {
   return (
     <AppLayout>
+      <Profile
+        authenticated={props.authenticated}
+        auth0Client={props.auth0Client}
+        profile={props.profile}
+      />
       <Presentation
         restricted
         title="Editorial Process"
         action={() => {}}
         actionLabel="I Agree"
-        auth0Client={() => {}}
       >
         <p>
           As most articles submitted to the Auth0 Guest Author Program are related to programming languages, frameworks, etc,
@@ -33,4 +39,4 @@ function Authorship() {
   );
 }
 
-export default Authorship;
+export default withProfile(Authorship);

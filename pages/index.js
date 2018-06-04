@@ -3,7 +3,7 @@ import Presentation from '../components/Presentation';
 import Profile from '../components/Profile';
 import withProfile from '../components/withProfile';
 
-function introduction(props) {
+function index(props) {
   return (
     <AppLayout>
       <Profile
@@ -15,7 +15,6 @@ function introduction(props) {
         title="Introduction"
         actionLabel="Sign In"
         action={() => {props.auth0Client.signIn()}}
-        auth0Client={props.auth0Client}
       >
         <p>
           The present website exists to support the Auth0 Guest Author Program.
@@ -26,4 +25,4 @@ function introduction(props) {
   );
 }
 
-export default withProfile(introduction);
+export default withProfile(index);
