@@ -30,11 +30,11 @@ function Profile(props) {
 
   return (
     <ContainerArea>
-      {props.auth0Client.isAuthenticated() &&
+      {props.authenticated &&
         <ProfileCard>
           <div>
             <img src="https://cdn.auth0.com/blog/profile-picture/bruno-krebs.png" alt="Author Profile"/>
-            {props.auth0Client.getProfile().name}
+            {props.profile.name}
           </div>
           <DefaultButton onClick={signOut}>Sair</DefaultButton>
         </ProfileCard>
@@ -44,7 +44,9 @@ function Profile(props) {
 }
 
 Profile.propTypes = {
-  auth0Client: PropTypes.object.isRequired,
+  authenticated: PropTypes.bool.isRequired,
+  auth0Client: PropTypes.object,
+  profile: PropTypes.object,
 };
 
 export default withRouter(Profile);
