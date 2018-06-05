@@ -20,7 +20,7 @@ function Presentation(props) {
         {props.children}
         <div className="actions">
           <div>
-            {props.cancel !== undefined && <DefaultButton onClick={props.cancel}>Go back</DefaultButton>}
+            {props.cancel !== undefined && <DefaultButton onClick={props.cancel}>{props.cancelLabel}</DefaultButton>}
           </div>
           <PrimaryButton
             onClick={props.action}

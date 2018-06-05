@@ -1,22 +1,22 @@
 import React from 'react';
-import AppLayout from '../components/AppLayout';
 import Presentation from '../components/Presentation';
 import Profile from '../components/Profile';
-import withProfile from '../components/withProfile';
+import withOnboardService from '../components/withOnboardService';
 
 function Authorship(props) {
   return (
-    <AppLayout>
+    <React.Fragment>
       <Profile
         authenticated={props.authenticated}
         auth0Client={props.auth0Client}
         profile={props.profile}
       />
       <Presentation
-        restricted
         title="Payment"
         action={() => {}}
         actionLabel="I Agree"
+        cancel={props.stepBack}
+        cancelLabel="Go Back"
       >
         <p>
           At the Auth0 Guest Author Program, we pay <strong>200 US dollars</strong> per article. That is, if you manage to write a small
@@ -29,8 +29,8 @@ function Authorship(props) {
           to finish the whole series.
         </p>
       </Presentation>
-    </AppLayout>
+    </React.Fragment>
   );
 }
 
-export default withProfile(Authorship);
+export default withOnboardService(Authorship);

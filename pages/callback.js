@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import ContentArea from '../components/ContentArea';
-import withProfile from '../components/withProfile';
+import withOnboardService from '../components/withOnboardService';
 
 const CallbackArea = ContentArea.extend`
   margin-top: 30px;
@@ -18,4 +17,4 @@ function Callback(props) {
   );
 }
 
-export default withProfile(Callback);
+export default withOnboardService(Callback);

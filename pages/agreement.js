@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import AppLayout from '../components/AppLayout';
 import Presentation from '../components/Presentation';
 import Profile from '../components/Profile';
-import withProfile from '../components/withProfile';
+import withOnboardService from '../components/withOnboardService';
 
 const AgreementContainer = styled.section`
   label {
@@ -47,7 +46,7 @@ const AgreementContainer = styled.section`
 
 function Authorship(props) {
   return (
-    <AppLayout>
+    <React.Fragment>
       <Profile
         authenticated={props.authenticated}
         auth0Client={props.auth0Client}
@@ -57,8 +56,8 @@ function Authorship(props) {
         <Presentation
           action={() => {}}
           actionLabel="I Agree"
-          cancel={() => {}}
-          cancelLabel="Step Back"
+          cancel={props.stepBack}
+          cancelLabel="Go Back"
           title="Agreement"
         >
           <h3>Copyright</h3>
@@ -79,8 +78,8 @@ function Authorship(props) {
           </label>
         </Presentation>
       </AgreementContainer>
-    </AppLayout>
+    </React.Fragment>
   );
 }
 
-export default withProfile(Authorship);
+export default withOnboardService(Authorship);

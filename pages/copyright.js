@@ -1,24 +1,22 @@
 import React from 'react';
-import AppLayout from '../components/AppLayout';
 import Presentation from '../components/Presentation';
 import Profile from '../components/Profile';
-import withProfile from '../components/withProfile';
+import withOnboardService from '../components/withOnboardService';
 
 function Copyright(props) {
   return (
-    <AppLayout>
+    <React.Fragment>
       <Profile
         authenticated={props.authenticated}
         auth0Client={props.auth0Client}
         profile={props.profile}
       />
       <Presentation
-        restricted
         action={() => {}}
         actionLabel="I Agree"
         title="Copyright"
-        cancel={() => {}}
-        cancelLabel="Step Back"
+        cancel={props.stepBack}
+        cancelLabel="Go Back"
       >
         <p>
           Having the authorship subject clearly understood, the second most important topic is regarding copyright of
@@ -41,8 +39,8 @@ function Copyright(props) {
           publications.
         </p>
       </Presentation>
-    </AppLayout>
+    </React.Fragment>
   )
 }
 
-export default withProfile(Copyright);
+export default withOnboardService(Copyright);

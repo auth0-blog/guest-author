@@ -28,55 +28,55 @@ function Breadcrumbs() {
       <BreadcrumbsList>
         <li>
           <ActiveLink href="/">
-            <a>Introduction</a>
+            Introduction
           </ActiveLink>
         </li>
         <li>></li>
         <li>
           <ActiveLink href="/authorship">
-            <a>Authorship</a>
+            Authorship
           </ActiveLink>
         </li>
         <li>></li>
         <li>
           <ActiveLink href="/copyright">
-            <a>Copyright</a>
+            Copyright
           </ActiveLink>
         </li>
         <li>></li>
         <li>
           <ActiveLink href="/plagiarism">
-            <a>Plagiarism</a>
+            Plagiarism
           </ActiveLink>
         </li>
         <li>></li>
         <li>
           <ActiveLink href="/agreement">
-            <a>Agreement</a>
+            Agreement
           </ActiveLink>
         </li>
         <li>></li>
         <li>
           <ActiveLink href="/payment">
-            <a>Payment</a>
+            Payment
           </ActiveLink>
         </li>
         <li>></li>
         <li>
           <ActiveLink href="/deadline">
-            <a>Deadline</a>
+            Deadline
           </ActiveLink>
         </li>
         <li>></li>
         <li>
           <ActiveLink href="/process">
-            <a>Process</a>
+            Process
           </ActiveLink>
         </li>
         <li>></li>
         <li>
           <ActiveLink href="/sample">
-            <a>Sample</a>
+            Sample
           </ActiveLink>
         </li>
       </BreadcrumbsList>

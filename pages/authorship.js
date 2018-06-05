@@ -1,22 +1,22 @@
 import React from 'react';
-import AppLayout from '../components/AppLayout';
 import Presentation from '../components/Presentation';
 import Profile from '../components/Profile';
-import withProfile from '../components/withProfile';
+import withOnboardService from '../components/withOnboardService';
 
 function Authorship(props) {
   return (
-    <AppLayout>
+    <React.Fragment>
       <Profile
         authenticated={props.authenticated}
         auth0Client={props.auth0Client}
         profile={props.profile}
       />
       <Presentation
-        restricted
         title="Authorship"
         action={() => {}}
         actionLabel="I Agree"
+        cancel={props.stepBack}
+        cancelLabel="Go Back"
       >
         <p>
           First and foremost, Auth0 wants to make clear to authors that we will never decline <strong>your moral rights as an author</strong>.
@@ -28,8 +28,8 @@ function Authorship(props) {
           <li>the right to <strong>object to false attribution</strong> (we will never attribute to you something you didn't created);</li>
         </ul>
       </Presentation>
-    </AppLayout>
+    </React.Fragment>
   );
 }
 
-export default withProfile(Authorship);
+export default withOnboardService(Authorship);

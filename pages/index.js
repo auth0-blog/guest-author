@@ -1,11 +1,11 @@
-import AppLayout from '../components/AppLayout'
+import React from 'react';
 import Presentation from '../components/Presentation';
 import Profile from '../components/Profile';
-import withProfile from '../components/withProfile';
+import withOnboardService from '../components/withOnboardService';
 
 function index(props) {
   return (
-    <AppLayout>
+    <React.Fragment>
       <Profile
         authenticated={props.authenticated}
         auth0Client={props.auth0Client}
@@ -21,8 +21,8 @@ function index(props) {
           If you want to apply to this program, just click on the <em>Sign In</em> button to get started.
         </p>
       </Presentation>
-    </AppLayout>
+    </React.Fragment>
   );
 }
 
-export default withProfile(index);
+export default withOnboardService(index);

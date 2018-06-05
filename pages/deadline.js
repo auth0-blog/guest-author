@@ -1,22 +1,22 @@
 import React from 'react';
-import AppLayout from '../components/AppLayout';
 import Presentation from '../components/Presentation';
 import Profile from '../components/Profile';
-import withProfile from '../components/withProfile';
+import withOnboardService from '../components/withOnboardService';
 
 function Authorship(props) {
   return (
-    <AppLayout>
+    <React.Fragment>
       <Profile
         authenticated={props.authenticated}
         auth0Client={props.auth0Client}
         profile={props.profile}
       />
       <Presentation
-        restricted
         title="Deadline"
         action={() => {}}
         actionLabel="I Agree"
+        cancel={props.stepBack}
+        cancelLabel="Go Back"
       >
         <p>
           A frequently asked question is if there is a deadline for the process. The short answer is: no, the process
@@ -29,8 +29,8 @@ function Authorship(props) {
           unfinished that becomes old news.
         </p>
       </Presentation>
-    </AppLayout>
+    </React.Fragment>
   );
 }
 
-export default withProfile(Authorship);
+export default withOnboardService(Authorship);

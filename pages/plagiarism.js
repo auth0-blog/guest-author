@@ -1,22 +1,22 @@
 import React from 'react';
-import AppLayout from '../components/AppLayout';
 import Presentation from '../components/Presentation';
 import Profile from '../components/Profile';
-import withProfile from '../components/withProfile';
+import withOnboardService from '../components/withOnboardService';
 
 function Authorship(props) {
   return (
-    <AppLayout>
+    <React.Fragment>
       <Profile
         authenticated={props.authenticated}
         auth0Client={props.auth0Client}
         profile={props.profile}
       />
       <Presentation
-        restricted
         title="Plagiarism"
         action={() => {}}
         actionLabel="I Agree"
+        cancel={props.stepBack}
+        cancelLabel="Go Back"
       >
         <p>
           Another extremelly important subject is regarding plagiarism. Auth0 takes advantage of modern plagiarism
@@ -32,8 +32,8 @@ function Authorship(props) {
           abusing on this practice and <strong>that the due credits are given</strong>.
         </p>
       </Presentation>
-    </AppLayout>
+    </React.Fragment>
   );
 }
 
-export default withProfile(Authorship);
+export default withOnboardService(Authorship);
