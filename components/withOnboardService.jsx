@@ -23,6 +23,10 @@ const auth0Client = new Auth0Web({
   scope: 'openid profile',
 });
 
+// not nice
+let agreeCopyright = false;
+let agreePlagiarism = false;
+
 export default (WrappedComponent) => {
   return withRouter(class extends React.Component {
     constructor(props) {
@@ -34,8 +38,8 @@ export default (WrappedComponent) => {
       this.state = {
         authenticated,
         profile,
-        agreeCopyright: false,
-        agreePlagiarism: false,
+        agreeCopyright,
+        agreePlagiarism,
       };
 
       auth0Client.subscribe((authenticated) => {
@@ -57,6 +61,8 @@ export default (WrappedComponent) => {
       this.moveForward = this.moveForward.bind(this);
       this.stepBack = this.stepBack.bind(this);
       this.submitSample = this.submitSample.bind(this);
+      this.toggleCopyright = this.toggleCopyright.bind(this);
+      this.togglePlagiarism = this.togglePlagiarism.bind(this);
 
       this.pagesOrder = ['/', '/authorship', '/copyright', '/plagiarism', '/agreement', '/payment', '/deadline', '/process', '/sample'];
     }
@@ -96,19 +102,21 @@ export default (WrappedComponent) => {
     }
 
     toggleCopyright() {
+      agreeCopyright = !this.state.agreeCopyright;
       this.setState({
-        agreeCopyright: !this.state.agreeCopyright,
+        agreeCopyright,
       });
     }
 
     togglePlagiarism() {
+      agreePlagiarism = !this.state.agreePlagiarism;
       this.setState({
-        agreePlagiarism: !this.state.agreePlagiarism,
+        agreePlagiarism,
       });
     }
 
     render() {
-      const {authenticated, profile} = this.state;
+      const {agreeCopyright, agreePlagiarism, authenticated, profile} = this.state;
       return (
         <Container>
           <Header>
@@ -119,6 +127,8 @@ export default (WrappedComponent) => {
           </Header>
           <Breadcrumbs/>
           <WrappedComponent
+            agreeCopyright={agreeCopyright}
+            agreePlagiarism={agreePlagiarism}
             auth0Client={auth0Client}
             authenticated={authenticated}
             moveForward={this.moveForward}

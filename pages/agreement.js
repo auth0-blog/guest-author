@@ -62,7 +62,7 @@ function Authorship(props) {
         >
           <h3>Copyright</h3>
           <p>Regarding the copyright, do you agree <strong>not to publish the article elsewhere</strong> without Auth0's consent?</p>
-          <label onClick={() => {}}>
+          <label onClick={props.toggleCopyright}>
             <span className={props.agreeCopyright ? 'checked' : ''}>
               <span>✔</span>
             </span>
@@ -70,7 +70,7 @@ function Authorship(props) {
           </label>
           <h3>Plagiarism</h3>
           <p>Regarding plagiarism, do you agree <strong>not to copy content</strong> from other resources without giving the due credits?</p>
-          <label onClick={() => {}}>
+          <label onClick={props.togglePlagiarism}>
             <span className={props.agreePlagiarism ? 'checked' : ''}>
               <span>✔</span>
             </span>
