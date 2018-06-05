@@ -117,7 +117,7 @@ export default (WrappedComponent) => {
               <CraftedByLogo/>
             </ContentArea>
           </Header>
-          <Breadcrumbs />
+          <Breadcrumbs/>
           <WrappedComponent
             auth0Client={auth0Client}
             authenticated={authenticated}

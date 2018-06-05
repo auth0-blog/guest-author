@@ -30,13 +30,13 @@ function Profile(props) {
   return (
     <ContainerArea>
       {props.authenticated &&
-        <ProfileCard>
-          <div>
-            <img src="https://cdn.auth0.com/blog/profile-picture/bruno-krebs.png" alt="Author Profile"/>
-            {props.profile.name}
-          </div>
-          <DefaultButton onClick={signOut}>Sair</DefaultButton>
-        </ProfileCard>
+      <ProfileCard>
+        <div>
+          <img src="https://cdn.auth0.com/blog/profile-picture/bruno-krebs.png" alt="Author Profile"/>
+          {props.profile.name}
+        </div>
+        <DefaultButton onClick={signOut}>Sair</DefaultButton>
+      </ProfileCard>
       }
     </ContainerArea>
   );

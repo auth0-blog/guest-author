@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {PrimaryButton, DefaultButton} from './Buttons';
+import {DefaultButton, PrimaryButton} from './Buttons';
 import Card from './Card';
 import ContentArea from './ContentArea';
 
