@@ -1,6 +1,6 @@
 import React from 'react';
-import Link from 'next/link'
 import styled from 'styled-components';
+import ActiveLink from './ActiveLink'
 import ContentArea from './ContentArea';
 
 const BreadcrumbsArea = ContentArea.extend`
@@ -20,14 +20,6 @@ const BreadcrumbsList = styled.ul`
     display: inline;
     margin-left: 5px;
   }
-  
-  > li > a {
-    color: #ccc;
-  }
-  
-  > li > a.active {
-    color: #777;
-  }
 `;
 
 function Breadcrumbs() {
@@ -35,48 +27,57 @@ function Breadcrumbs() {
     <BreadcrumbsArea>
       <BreadcrumbsList>
         <li>
-          <Link href="/">
-            <a>Introduction</a></Link>
+          <ActiveLink href="/">
+            <a>Introduction</a>
+          </ActiveLink>
         </li>
         <li>></li>
         <li>
-          <Link href="/authorship">
-            <a>Authorship</a></Link>
+          <ActiveLink href="/authorship">
+            <a>Authorship</a>
+          </ActiveLink>
         </li>
         <li>></li>
         <li>
-          <Link href="/copyright">
-            <a>Copyright</a></Link>
+          <ActiveLink href="/copyright">
+            <a>Copyright</a>
+          </ActiveLink>
         </li>
         <li>></li>
         <li>
-          <Link href="/plagiarism">
-            <a>Plagiarism</a></Link>
+          <ActiveLink href="/plagiarism">
+            <a>Plagiarism</a>
+          </ActiveLink>
         </li>
         <li>></li>
         <li>
-          <Link href="/agreement">
-            <a>Agreement</a></Link>
+          <ActiveLink href="/agreement">
+            <a>Agreement</a>
+          </ActiveLink>
         </li>
         <li>></li>
         <li>
-          <Link href="/payment">
-            <a>Payment</a></Link>
+          <ActiveLink href="/payment">
+            <a>Payment</a>
+          </ActiveLink>
         </li>
         <li>></li>
         <li>
-          <Link href="/deadline">
-            <a>Deadline</a></Link>
+          <ActiveLink href="/deadline">
+            <a>Deadline</a>
+          </ActiveLink>
         </li>
         <li>></li>
         <li>
-          <Link href="/process">
-            <a>Process</a></Link>
+          <ActiveLink href="/process">
+            <a>Process</a>
+          </ActiveLink>
         </li>
         <li>></li>
         <li>
-          <Link href="/sample">
-            <a>Sample</a></Link>
+          <ActiveLink href="/sample">
+            <a>Sample</a>
+          </ActiveLink>
         </li>
       </BreadcrumbsList>
     </BreadcrumbsArea>
