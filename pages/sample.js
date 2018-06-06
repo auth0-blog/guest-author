@@ -13,7 +13,7 @@ function Authorship(props) {
       />
       <Presentation
         title="Sample"
-        action={() => { alert('Thanks!') }}
+        action={() => { props.submitSample('testing'); }}
         actionLabel="I Agree"
         cancel={props.stepBack}
         cancelLabel="Go Back"

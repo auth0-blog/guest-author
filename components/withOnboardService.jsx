@@ -6,11 +6,8 @@ import Container from '../components/Container';
 import ContentArea from '../components/ContentArea';
 import CraftedByLogo from '../components/CraftedByLogo';
 import Header from '../components/Header';
-import DevConfig from '../config/development.env';
-import ProdConfig from '../config/production.env';
+import config from '../config/auth0';
 import OnboardClient from '../services/OnboardClient';
-
-const config = process.env.NODE_ENV === 'production' ? ProdConfig : DevConfig;
 
 const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
 
@@ -54,8 +51,8 @@ export default (WrappedComponent) => {
       });
 
       this.onboardClient = new OnboardClient(
-        'https://wt-0d41b47a3e54aad29a36abfdd5ef87ea-0.sandbox.auth0-extend.com/guest-author-program-dev',
-        props.auth0Client,
+        'http://app.local:3000/api/',
+        auth0Client,
       );
 
       this.moveForward = this.moveForward.bind(this);
