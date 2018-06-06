@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "next build",
+    "deploy": "now -e NODE_ENV=production -e MONGO_URL=$MONGO_URL -e SLACK_TOKEN=$SLACK_TOKEN -e SLACK_CHANNEL=$SLACK_CHANNEL -t $NOW_TOKEN",
     "dev": "node server.js",
     "start": "NODE_ENV=production node server.js"
   },

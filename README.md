@@ -45,7 +45,14 @@ For the moment, this repository does not contain any configuration regarding [Co
 
 ### Technical Details
 
-If you take a look, you will see that [the `.travis.yml` file](./.travis.yml) contains a property called `secure` under `env.matrix` and that this property contains a token. This token is actually a [Now](https://zeit.co/now) token [encrypted with the help of the following command](https://docs.travis-ci.com/user/environment-variables/#Encrypting-environment-variables):
+If you take a look, you will see that [the `.travis.yml` file](./.travis.yml) contains properties called `secure` under `env.matrix` and that these property contains tokens. These tokens are actually for properties:
+
+- a [Now](https://zeit.co/now) token;
+- the `MONGO_URL` used by the backend server;
+- a `SLACK_TOKEN`, also used by the backend server;
+- the `SLACK_CHANNEL` that is also used by the backend server;
+
+That are [encrypted with the help of the following command](https://docs.travis-ci.com/user/environment-variables/#Encrypting-environment-variables):
 
 ```bash
 travis encrypt NOW_TOKEN=123ABC --add env.matrix
@@ -58,7 +65,7 @@ The advantage of this approach is that by encrypting the Now token, we make it p
 Another important concept to have in mind is regarding the script associated with the `master` branch on [the `.travis.yml` file](./.travis.yml):
 
 ```bash
-now --token $NOW_TOKEN && now alias --token $NOW_TOKEN
+npm run dev && now alias -t $NOW_TOKEN
 ```
 
 This command, besides using the `NOW_TOKEN` env variable, [relies on a file called [`now.json`](./now.json) to know how to create Now aliases properly](https://zeit.co/docs/other/faq#how-do-i-deploy-and-alias-in-a-single-command).
