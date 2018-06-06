@@ -38,3 +38,27 @@ As such, you will need to define a custom domain (a fake one) in your `/etc/host
 ```
 
 Then you can go to [http://app.local:3000/](http://app.local:3000/) to access the tool.
+
+## Continuous Deployment
+
+For the moment, this repository does not contain any configuration regarding [Continuous Delivery](https://www.thoughtworks.com/continuous-integration) per se. What this repository contains though is Travis configured as the Continuous Deployment tool. More specifically, whenever a push is made to this repository, Travis triggers a deployment process on [Now](https://zeit.co/now) (the chosen host for this repository).
+
+### Technical Details
+
+If you take a look, you will see that [the `.travis.yml` file](./.travis.yml) contains a property called `secure` under `env.matrix` and that this property contains a token. This token is actually a [Now](https://zeit.co/now) token [encrypted with the help of the following command](https://docs.travis-ci.com/user/environment-variables/#Encrypting-environment-variables):
+
+```bash
+travis encrypt NOW_TOKEN=123ABC --add env.matrix
+```
+
+> To use this command, replace `123ABC` with a  Now token.
+
+The advantage of this approach is that by encrypting the Now token, we make it possible to commit it to a public repository like this one. To create this encrypted token, Travis (probably) used a public token that can be read only by a private token associated with [this repository on Travis itself](https://travis-ci.org/auth0-blog/guest-author). Now, when Travis detects a push to this repository, it creates an environment variable called `NOW_TOKEN` that contains the unencrypted version of the Now token and uses it to deploy the new version securely.
+
+Another important concept to have in mind is regarding the script associated with the `master` branch on [the `.travis.yml` file](./.travis.yml):
+
+```bash
+now --token $NOW_TOKEN && now alias --token $NOW_TOKEN
+```
+
+This command, besides using the `NOW_TOKEN` env variable, [relies on a file called [`now.json`](./now.json) to know how to create Now aliases properly](https://zeit.co/docs/other/faq#how-do-i-deploy-and-alias-in-a-single-command).
