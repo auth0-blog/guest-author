@@ -27,12 +27,16 @@ function Profile(props) {
     props.auth0Client.signOut();
   };
 
+  const profilePicture = (props.authenticated && props.profile.picture) ?
+    props.profile.picture :
+    'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
+
   return (
     <ContainerArea>
       {props.authenticated &&
       <ProfileCard>
         <div>
-          <img src="https://cdn.auth0.com/blog/profile-picture/bruno-krebs.png" alt="Author Profile"/>
+          <img src={profilePicture} alt="Author Profile"/>
           {props.profile.name}
         </div>
         <DefaultButton onClick={signOut}>Sair</DefaultButton>
