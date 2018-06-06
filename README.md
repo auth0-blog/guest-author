@@ -45,22 +45,20 @@ For the moment, this repository does not contain any configuration regarding [Co
 
 ### Technical Details
 
-If you take a look, you will see that [the `.travis.yml` file](./.travis.yml) contains properties called `secure` under `env.matrix` and that these property contains tokens. These tokens are actually for properties:
+If you take a look, you will see that [the `.travis.yml` file](./.travis.yml) contains a property called `secure` under `env.matrix` and that this property contains an encrypted value. This value is actually formed of four environment variables:
 
-- a [Now](https://zeit.co/now) token;
-- the `MONGO_URL` used by the backend server;
-- a `SLACK_TOKEN`, also used by the backend server;
-- the `SLACK_CHANNEL` that is also used by the backend server;
+- `NOW_TOKEN`: a [Now](https://zeit.co/now) token to release new versions;
+- `MONGO_URL`: the MongoDB URL used by the backend server;
+- `SLACK_TOKEN`: a token to push messages to Slack on behalf of a Slack bot;
+- `SLACK_CHANNEL`: the id of the channel where these messages will appear;
 
-That are [encrypted with the help of the following command](https://docs.travis-ci.com/user/environment-variables/#Encrypting-environment-variables):
+This property (`secure`) is [encrypted with the help of the following command](https://docs.travis-ci.com/user/environment-variables/#Encrypting-environment-variables):
 
 ```bash
-travis encrypt NOW_TOKEN=123ABC --add env.matrix
+travis encrypt NOW_TOKEN=123ABC MONGO_URL=... ... --add env.matrix
 ```
 
-> To use this command, replace `123ABC` with a  Now token.
-
-The advantage of this approach is that by encrypting the Now token, we make it possible to commit it to a public repository like this one. To create this encrypted token, Travis used a public token that can be read only with a private token attached to [this repository on Travis itself](https://travis-ci.org/auth0-blog/guest-author). Now, when Travis detects a push to this repository, it creates an environment variable called `NOW_TOKEN` that contains the unencrypted version of the Now token and uses it to deploy the new version securely.
+The advantage of this approach is that by encrypting the Now token and the other env variables, it becomes possible to version-control them to a public repository like this one. To create this encrypted token, Travis used a public token that can be read only with a private token attached to [this repository on Travis itself](https://travis-ci.org/auth0-blog/guest-author). Now, when Travis detects a push to this repository, it creates environment variables (`NOW_TOKEN`, `MONGO_URL`, etc) that contain the unencrypted versions of these variables.
 
 Another important concept to have in mind is regarding the script associated with the `master` branch on [the `.travis.yml` file](./.travis.yml):
 
