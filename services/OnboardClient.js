@@ -1,8 +1,7 @@
 import fetch from 'isomorphic-unfetch';
 
 export default class OnboardClient {
-  constructor(baseURL, auth0Client) {
-    this.baseURL = baseURL;
+  constructor(auth0Client) {
     this.auth0Client = auth0Client;
   }
 
@@ -15,7 +14,7 @@ export default class OnboardClient {
       headers['Authorization'] = `Bearer ${this.auth0Client.getAccessToken()}`;
     }
 
-    return fetch(this.baseURL, {
+    return fetch('/api/', {
       method: 'POST',
       headers,
       body: JSON.stringify({ name, email, sample })

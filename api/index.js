@@ -8,6 +8,8 @@ const config = require('../config/auth0');
 
 const prod = process.env.NODE_ENV === 'production';
 
+console.log(prod, process.env.NODE_ENV);
+
 const router = express.Router();
 
 router.use(bodyParser.json());

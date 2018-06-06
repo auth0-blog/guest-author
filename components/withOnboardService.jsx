@@ -50,10 +50,7 @@ export default (WrappedComponent) => {
         if (props.router.pathname === '/callback') props.router.push('/');
       });
 
-      this.onboardClient = new OnboardClient(
-        'http://app.local:3000/api/',
-        auth0Client,
-      );
+      this.onboardClient = new OnboardClient(auth0Client);
 
       this.moveForward = this.moveForward.bind(this);
       this.stepBack = this.stepBack.bind(this);
