@@ -54,8 +54,8 @@ function Authorship(props) {
       />
       <AgreementContainer>
         <Presentation
-          action={() => {}}
-          actionLabel="I Agree"
+          action={props.moveForward}
+          actionLabel="Next"
           cancel={props.stepBack}
           cancelLabel="Go Back"
           title="Agreement"

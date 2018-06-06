@@ -12,8 +12,8 @@ function Copyright(props) {
         profile={props.profile}
       />
       <Presentation
-        action={() => {}}
-        actionLabel="I Agree"
+        action={props.moveForward}
+        actionLabel="Next"
         title="Copyright"
         cancel={props.stepBack}
         cancelLabel="Go Back"
