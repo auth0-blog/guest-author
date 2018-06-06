@@ -53,7 +53,7 @@ travis encrypt NOW_TOKEN=123ABC --add env.matrix
 
 > To use this command, replace `123ABC` with a  Now token.
 
-The advantage of this approach is that by encrypting the Now token, we make it possible to commit it to a public repository like this one. To create this encrypted token, Travis (probably) used a public token that can be read only by a private token associated with [this repository on Travis itself](https://travis-ci.org/auth0-blog/guest-author). Now, when Travis detects a push to this repository, it creates an environment variable called `NOW_TOKEN` that contains the unencrypted version of the Now token and uses it to deploy the new version securely.
+The advantage of this approach is that by encrypting the Now token, we make it possible to commit it to a public repository like this one. To create this encrypted token, Travis used a public token that can be read only with a private token attached to [this repository on Travis itself](https://travis-ci.org/auth0-blog/guest-author). Now, when Travis detects a push to this repository, it creates an environment variable called `NOW_TOKEN` that contains the unencrypted version of the Now token and uses it to deploy the new version securely.
 
 Another important concept to have in mind is regarding the script associated with the `master` branch on [the `.travis.yml` file](./.travis.yml):
 
