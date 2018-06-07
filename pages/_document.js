@@ -14,7 +14,7 @@ export default class MyDocument extends Document {
       <html>
       <Head>
         <title>The Auth0 Guest Author Program</title>
-        <meta charSet="utf-8" />
+        <meta charSet="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <link rel="shortcut icon" href="https://cdn.auth0.com/styleguide/components/1.0.8/media/logos/img/favicon.png" />
         <link rel="stylesheet" href="./static/index.css" />
