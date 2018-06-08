@@ -1,3 +1,4 @@
+import React, {Component} from 'react';
 import styled from 'styled-components';
 import Arrow from '../components/Arrow';
 import Presentation from '../components/Presentation';
@@ -10,11 +11,18 @@ const Canvas = styled.svg`
   height: 430px;
 `;
 
-const Step = styled.rect`
-  fill: #ddd;
-  stroke: #999;
+const Step = styled.g`
+  opacity: 0.3;
+  
+  &.active {
+    opacity: 1;
+  }
+`;
+
+const Box = styled.rect`
+  fill: #eee;
+  stroke: #ccc;
   stroke-width: 1px;
-  opacity: 0.5;
 `;
 
 const DraggableArea = styled(DragScroll)`
@@ -80,62 +88,80 @@ function getArrowCoordinates(idx) {
   };
 }
 
-function Authorship(props) {
+class Authorship extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      steps: [
+        { title: 'Topic Definition', active: true, description: 'The Guest Author (GA) and Auth0 define a topic together.' },
+        { title: 'Prototype Development', active: false, description: 'The GA develops a prototype with the chosen technologies and upload it to a GitHub repo with basic instructions on how to run.' },
+        { title: 'Prototype Review', active: false, description: 'Auth0 analyses the prototype, the code, and the whole implementation and approach to provide feedback.' },
 
-  const steps = [
-    { title: 'Topic Definition', description: 'The Guest Author (GA) and Auth0 define a topic together.' },
-    { title: 'Prototype Development', description: 'The GA develops a prototype with the chosen technologies and upload it to a GitHub repo with basic instructions on how to run.' },
-    { title: 'Prototype Review', description: 'Auth0 analyses the prototype, the code, and the whole implementation and approach to provide feedback.' },
+        { title: 'Prototype Refactoring', active: false, description: 'The GA applies (if needed) any fix/enhancement asked by Auth0.' },
+        { title: 'Outline Definition', active: false, description: 'The GA shares an outline of the article (just the main structure with headers and sub-headers, no real content).' },
+        { title: 'Outline Review', active: false, description: 'Auth0 analyses and make comments on the outline.' },
 
-    { title: 'Prototype Refactoring', description: 'The GA applies (if needed) any fix/enhancement asked by Auth0.' },
-    { title: 'Outline Definition', description: 'The GA shares an outline of the article (just the main structure with headers and sub-headers, no real content).' },
-    { title: 'Outline Review', description: 'Auth0 analyses and make comments on the outline.' },
+        { title: 'Outline Amendments', active: false, description: 'The GA applies (if needed) corrections to the outline.' },
+        { title: 'First Draft', active: false, description: 'The GA writes the post.' },
+        { title: 'Draft Review', active: false, description: 'Auth0 reviews the post and, if needed, make corrections, amendments, etc.' },
 
-    { title: 'Outline Amendments', description: 'The GA applies (if needed) corrections to the outline.' },
-    { title: 'First Draft', description: 'The GA writes the post.' },
-    { title: 'Draft Review', description: 'Auth0 reviews the post and, if needed, make corrections, amendments, etc.' },
+        { title: 'Draft Amendments', active: false, description: 'Auth0 pays for the article (in the case of a series, we might wait for the last piece to process the payment).' },
+        { title: 'Payment', active: false, description: 'Auth0 pays for the article (in the case of a series, we might wait for the last piece to process the payment).' },
+        { title: 'Publish', active: false, description: 'Auth0 pays for the article (in the case of a series, we might wait for the last piece to process the payment).' },
+      ],
+    };
+    this.selectStep = this.selectStep.bind(this);
+  }
 
-    { title: 'Draft Amendments', description: 'Auth0 pays for the article (in the case of a series, we might wait for the last piece to process the payment).' },
-    { title: 'Payment', description: 'Auth0 pays for the article (in the case of a series, we might wait for the last piece to process the payment).' },
-  ];
+  selectStep(selectedIdx) {
+    const steps = this.state.steps.map((step, idx) => {
+      step.active = idx <= selectedIdx;
+      return step;
+    });
 
-  return (
-    <React.Fragment>
-      <Profile
-        authenticated={props.authenticated}
-        auth0Client={props.auth0Client}
-        profile={props.profile}
-      />
-      <Presentation
-        title="Editorial Process"
-        action={props.moveForward}
-        actionLabel="Next"
-        cancel={props.stepBack}
-        cancelLabel="Go Back"
-      >
-        <p>
-          As most articles submitted to the Guest Author Program are related to programming languages, frameworks, etc,
-          the following process usually takes place:
-        </p>
-        <DraggableArea height="460px" width="100%">
-          <Canvas>
-            { steps.map((step, idx) => {
-              const coordinates = getCoordinates(idx);
-              const arrowCoordinates = getArrowCoordinates(idx);
-              const lastElement = idx === steps.length - 1;
-              return (
-                <g key={idx}>
-                  { !lastElement && <Arrow start={arrowCoordinates.start} end={arrowCoordinates.end} id={idx} /> }
-                  <Step x={coordinates.x + 10} y={coordinates.y + 20} rx="10" ry="10" width="165" height="60" />
-                  <text x={coordinates.x + 20} y={coordinates.y + 55} fontFamily="Verdana" fontSize="12" fill="666">{step.title}</text>
-                </g>
-              );
-            })}
-          </Canvas>
-        </DraggableArea>
-      </Presentation>
-    </React.Fragment>
-  );
+    this.setState({
+      steps,
+    });
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <Profile
+          authenticated={this.props.authenticated}
+          auth0Client={this.props.auth0Client}
+          profile={this.props.profile}
+        />
+        <Presentation
+          title="Editorial Process"
+          action={this.props.moveForward}
+          actionLabel="Next"
+          cancel={this.props.stepBack}
+          cancelLabel="Go Back"
+        >
+          <p>
+            From ideation to publishment, the process of writing to the Guest Author Program consist of the following steps:
+          </p>
+          <DraggableArea height="460px" width="100%">
+            <Canvas>
+              { this.state.steps.map((step, idx) => {
+                const coordinates = getCoordinates(idx);
+                const arrowCoordinates = getArrowCoordinates(idx);
+                const lastElement = idx === this.state.steps.length - 1;
+                return (
+                  <Step key={idx} className={step.active ? 'active' : ''} onClick={() => this.selectStep(idx)}>
+                    { !lastElement && <Arrow start={arrowCoordinates.start} end={arrowCoordinates.end} id={idx} /> }
+                    <Box x={coordinates.x + 10} y={coordinates.y + 20} rx="10" ry="10" width="165" height="60" />
+                    <text x={coordinates.x + 20} y={coordinates.y + 55} fontFamily="Verdana" fontSize="12" fill="666">{step.title}</text>
+                  </Step>
+                );
+              })}
+            </Canvas>
+          </DraggableArea>
+        </Presentation>
+      </React.Fragment>
+    );
+  }
 }
 
-export default withOnboardService(Authorship);
+export default withOnboardService((props) => <Authorship {...props} />);
