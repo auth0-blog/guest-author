@@ -3,11 +3,7 @@ import Arrow from '../components/Arrow';
 import Presentation from '../components/Presentation';
 import Profile from '../components/Profile';
 import withOnboardService from '../components/withOnboardService';
-
-const CanvasContainer = styled.div`
-  width: 100%;
-  overflow: auto;
-`;
+import DragScroll from 'react-dragscroll';
 
 const Canvas = styled.svg`
   width: 700px;
@@ -19,6 +15,14 @@ const Step = styled.rect`
   stroke: #999;
   stroke-width: 1px;
   opacity: 0.5;
+`;
+
+const DraggableArea = styled(DragScroll)`
+  cursor: default;
+  
+  @media (max-width: 700px) {
+    cursor: grab;
+  }
 `;
 
 function getPosition(idx) {
@@ -97,7 +101,7 @@ function Authorship(props) {
           As most articles submitted to the Auth0 Guest Author Program are related to programming languages, frameworks, etc,
           the following process usually takes place:
         </p>
-        <CanvasContainer>
+        <DraggableArea height="460px" width="100%">
           <Canvas>
             { steps.map((step, idx) => {
               const coordinates = getCoordinates(idx);
@@ -111,7 +115,7 @@ function Authorship(props) {
               );
             })}
           </Canvas>
-        </CanvasContainer>
+        </DraggableArea>
       </Presentation>
     </React.Fragment>
   );
