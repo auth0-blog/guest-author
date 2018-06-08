@@ -5,6 +5,10 @@ body {
   padding-bottom: 30px;
 }
 
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
 a {
   color: inherit;
 }

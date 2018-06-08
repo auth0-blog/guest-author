@@ -10,11 +10,12 @@ const BreadcrumbsArea = ContentArea.extend`
 const BreadcrumbsList = styled.ul`
   margin-left: 0;
   list-style: none;
-  font-size: 12px;
+  font-size: 13px;
   padding-left: 0;
   text-align: center;
   max-width: 770px;
-  overflow-x: scroll;
+  overflow-x: auto;
+  margin: 15px 0 15px 0;
   
   > li {
     display: inline;

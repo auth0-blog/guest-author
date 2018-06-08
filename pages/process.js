@@ -6,7 +6,7 @@ import withOnboardService from '../components/withOnboardService';
 
 const CanvasContainer = styled.div`
   width: 100%;
-  overflow: scroll;
+  overflow: auto;
 `;
 
 const Canvas = styled.svg`
