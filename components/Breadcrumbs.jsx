@@ -75,8 +75,8 @@ function Breadcrumbs() {
         </li>
         <li>></li>
         <li>
-          <ActiveLink href="/sample">
-            Sample
+          <ActiveLink href="/application">
+            Application
           </ActiveLink>
         </li>
       </BreadcrumbsList>

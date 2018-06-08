@@ -54,11 +54,11 @@ export default (WrappedComponent) => {
 
       this.moveForward = this.moveForward.bind(this);
       this.stepBack = this.stepBack.bind(this);
-      this.submitSample = this.submitSample.bind(this);
+      this.apply = this.apply.bind(this);
       this.toggleCopyright = this.toggleCopyright.bind(this);
       this.togglePlagiarism = this.togglePlagiarism.bind(this);
 
-      this.pagesOrder = ['/', '/authorship', '/copyright', '/plagiarism', '/agreement', '/payment', '/deadline', '/process', '/sample'];
+      this.pagesOrder = ['/', '/authorship', '/copyright', '/plagiarism', '/agreement', '/payment', '/deadline', '/process', '/application'];
     }
 
     async componentDidMount() {
@@ -89,10 +89,10 @@ export default (WrappedComponent) => {
       this.props.router.push(`${this.pagesOrder[currentPosition + 1]}`);
     }
 
-    submitSample(sample) {
+    apply() {
       if (!this.state.authenticated) return;
       const {name, email} = this.state.profile;
-      this.onboardClient.submitSample({name, email, sample});
+      this.onboardClient.apply({name, email});
     }
 
     toggleCopyright() {
@@ -128,7 +128,7 @@ export default (WrappedComponent) => {
             moveForward={this.moveForward}
             profile={profile}
             stepBack={this.stepBack}
-            submitSample={this.submitSample}
+            apply={this.apply}
             toggleCopyright={this.toggleCopyright}
             togglePlagiarism={this.togglePlagiarism}
           >
