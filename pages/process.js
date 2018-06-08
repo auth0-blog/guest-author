@@ -14,6 +14,10 @@ const Canvas = styled.svg`
 const Step = styled.g`
   opacity: 0.3;
   
+  :hover {
+    cursor: pointer;
+  }
+  
   &.active {
     opacity: 1;
   }
