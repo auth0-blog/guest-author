@@ -49,7 +49,23 @@ function getCoordinates(idx) {
 }
 
 function getArrowCoordinates(idx) {
+  const vertical = (idx + 1) % 3 === 0;
+
   const {row, column, inverse} = getPosition(idx);
+
+  if (vertical && inverse) {
+    return {
+      start: {x: 92.5 + column * 235, y: row * 145 + 50},
+      end: {x: 92.5 + column * 235, y: row * 195 + 50},
+    };
+  }
+
+  if (vertical) {
+    return {
+      start: {x: 92.5 + column * 235, y: row * 115 + 80},
+      end: {x: 92.5 + column * 235, y: row * 115 + 130},
+    };
+  }
 
   if (inverse) {
     return {
@@ -61,7 +77,7 @@ function getArrowCoordinates(idx) {
   return {
     start: {x: 175 + column * 235, y: row * 115 + 50},
     end: {x: 240 + column * 235, y: row * 115 + 50},
-  }
+  };
 }
 
 function Authorship(props) {
@@ -106,9 +122,10 @@ function Authorship(props) {
             { steps.map((step, idx) => {
               const coordinates = getCoordinates(idx);
               const arrowCoordinates = getArrowCoordinates(idx);
+              const lastElement = idx === steps.length - 1;
               return (
                 <g key={idx}>
-                  <Arrow start={arrowCoordinates.start} end={arrowCoordinates.end} id={idx} />
+                  { !lastElement && <Arrow start={arrowCoordinates.start} end={arrowCoordinates.end} id={idx} /> }
                   <Step x={coordinates.x + 10} y={coordinates.y + 20} rx="10" ry="10" width="165" height="60" />
                   <text x={coordinates.x + 20} y={coordinates.y + 55} fontFamily="Verdana" fontSize="12" fill="666">{step.title}</text>
                 </g>
