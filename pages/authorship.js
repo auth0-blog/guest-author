@@ -19,14 +19,15 @@ function Authorship(props) {
         cancelLabel="Go Back"
       >
         <p>
-          First and foremost, Auth0 wants to make clear to authors that we will never decline <strong>your moral rights as an author</strong>.
-          That is, you can rest assured that we will always attribute to you:
+          First and foremost, Auth0 wants to make clear to authors that their <strong>moral rights as authors </strong>
+          will never be declined. That is, authors can rest assured that they will always have:
         </p>
         <ul>
-          <li>the <strong>right of paternity</strong> of the work (you will always be identified as the original author);</li>
-          <li>the <strong>right of integrity</strong> (we will never make derogatory amendments to your work);</li>
-          <li>the right to <strong>object to false attribution</strong> (we will never attribute to you something you didn't created);</li>
+          <li>the <strong>right of paternity</strong>;</li>
+          <li>the <strong>right of integrity</strong>;</li>
+          <li>and the right to <strong>object to false attribution</strong>;</li>
         </ul>
+        to protect their work and themselves.
       </Presentation>
     </React.Fragment>
   );
