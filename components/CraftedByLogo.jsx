@@ -2,9 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+    
   > img {
     max-width: 80px;
-    margin-top: 15px;
   }
 `;
 

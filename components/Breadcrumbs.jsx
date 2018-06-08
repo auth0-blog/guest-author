@@ -8,7 +8,6 @@ const BreadcrumbsArea = ContentArea.extend`
 `;
 
 const BreadcrumbsList = styled.ul`
-  margin-left: 0;
   list-style: none;
   font-size: 13px;
   padding-left: 0;

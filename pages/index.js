@@ -27,7 +27,7 @@ function index(props) {
         action={action}
       >
         <p>
-          The present website exists to help on the onboard process of the Auth0 Guest Author Program.
+          The present website exists to help on the onboard process of the Guest Author Program.
         </p>
         {
           !props.authenticated &&

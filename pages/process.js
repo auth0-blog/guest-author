@@ -98,7 +98,7 @@ function Authorship(props) {
         cancelLabel="Go Back"
       >
         <p>
-          As most articles submitted to the Auth0 Guest Author Program are related to programming languages, frameworks, etc,
+          As most articles submitted to the Guest Author Program are related to programming languages, frameworks, etc,
           the following process usually takes place:
         </p>
         <DraggableArea height="460px" width="100%">

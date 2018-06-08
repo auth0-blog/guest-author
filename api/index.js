@@ -59,7 +59,7 @@ async function createApplication(req, res, next) {
     if (err) return next(err);
 
     const web = new WebClient(process.env.SLACK_TOKEN);
-    const botMessage = `<!here>, ${req.body.name} just applied to the Auth0 Guest Author Program. You can find the details of their application over here: ${APP_URL}/applicant/${result.ops[0]._id}`;
+    const botMessage = `<!here>, ${req.body.name} just applied to the Guest Author Program. You can find the details of their application over here: ${APP_URL}/applicant/${result.ops[0]._id}`;
     const slackRes = await web.chat.postMessage({ channel: process.env.SLACK_CHANNEL, text: botMessage });
 
     res.status(200).send(slackRes.ts);

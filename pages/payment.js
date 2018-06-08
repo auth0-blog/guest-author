@@ -19,7 +19,7 @@ function Authorship(props) {
         cancelLabel="Go Back"
       >
         <p>
-          At the Auth0 Guest Author Program, we pay <strong>200 US dollars</strong> per article. That is, if you manage to write a small
+          At the Guest Author Program, we pay <strong>200 US dollars</strong> per article. That is, if you manage to write a small
           series about "Developing Modern Apps with Django and Vue.js" containing three articles, you will get <strong>600 US
           dollars</strong>. If you manage to address your topic in a single article, then you get 200 dollars.
         </p>

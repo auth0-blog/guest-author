@@ -115,7 +115,7 @@ export default (WrappedComponent) => {
         <Container>
           <Header>
             <ContentArea>
-              <h1>The Auth0 Guest Author Program</h1>
+              <h1>The Guest Author Program</h1>
               <CraftedByLogo/>
             </ContentArea>
           </Header>
