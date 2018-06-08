@@ -17,7 +17,7 @@ const auth0Client = new Auth0Web({
   clientID: config.clientID,
   redirectUri: `${baseUrl}/callback`,
   responseType: 'token id_token',
-  scope: 'openid profile',
+  scope: 'openid email profile',
 });
 
 // not nice
