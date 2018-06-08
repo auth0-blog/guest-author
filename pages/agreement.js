@@ -60,21 +60,19 @@ function Authorship(props) {
           cancelLabel="Go Back"
           title="Agreement"
         >
-          <h3>Copyright</h3>
-          <p>Regarding the copyright, do you agree <strong>not to publish the article elsewhere</strong> without Auth0's consent?</p>
+          <p>Regarding the copyright, do you agree not to publish the article elsewhere without Auth0's consent?</p>
           <label onClick={props.toggleCopyright}>
             <span className={props.agreeCopyright ? 'checked' : ''}>
               <span>✔</span>
             </span>
-            Yes, I agree <strong>not to publish the article elsewhere</strong> without Auth0's consent.
+            Yes, <strong>I agree not to publish the article elsewhere</strong>.
           </label>
-          <h3>Plagiarism</h3>
-          <p>Regarding plagiarism, do you agree <strong>not to copy content</strong> from other resources without giving the due credits?</p>
+          <p>Regarding plagiarism, do you agree not to copy content from other resources without giving the due credits?</p>
           <label onClick={props.togglePlagiarism}>
             <span className={props.agreePlagiarism ? 'checked' : ''}>
               <span>✔</span>
             </span>
-            Yes, I agree <strong>not to copy content</strong> from other resources.
+            Yes, <strong>I agree not to commit plagiarism</strong>.
           </label>
         </Presentation>
       </AgreementContainer>
