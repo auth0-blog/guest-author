@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import Arrow from '../components/Arrow';
+import Notification from '../components/Notification/Notification';
+import NotificationManager from '../components/Notification/NotificationManager';
 import Presentation from '../components/Presentation';
 import Profile from '../components/Profile';
 import withOnboardService from '../components/withOnboardService';
@@ -98,20 +100,20 @@ class Authorship extends Component {
     this.state = {
       steps: [
         { title: 'Topic Definition', active: true, description: 'The Guest Author (GA) and Auth0 define a topic together.' },
-        { title: 'Prototype Development', active: false, description: 'The GA develops a prototype with the chosen technologies and upload it to a GitHub repo with basic instructions on how to run.' },
+        { title: 'Prototype Development', active: false, description: 'The GA develops a prototype with the chosen technologies and upload it to a GitHub repo with basic instructions on how to run it.' },
         { title: 'Prototype Review', active: false, description: 'Auth0 analyses the prototype, the code, and the whole implementation and approach to provide feedback.' },
 
         { title: 'Prototype Refactoring', active: false, description: 'The GA applies (if needed) any fix/enhancement asked by Auth0.' },
-        { title: 'Outline Definition', active: false, description: 'The GA shares an outline of the article (just the main structure with headers and sub-headers, no real content).' },
+        { title: 'Outline Definition', active: false, description: 'The GA shares an outline of the article (just the main structure with headers and sub-headers, no content needed).' },
         { title: 'Outline Review', active: false, description: 'Auth0 analyses and make comments on the outline.' },
 
         { title: 'Outline Amendments', active: false, description: 'The GA applies (if needed) corrections to the outline.' },
         { title: 'First Draft', active: false, description: 'The GA writes the post.' },
-        { title: 'Draft Review', active: false, description: 'Auth0 reviews the post and, if needed, make corrections, amendments, etc.' },
+        { title: 'Draft Review', active: false, description: 'Auth0 reviews the post and, if needed, ask corrections, amendments, etc.' },
 
-        { title: 'Draft Amendments', active: false, description: 'Auth0 pays for the article (in the case of a series, we might wait for the last piece to process the payment).' },
+        { title: 'Draft Amendments', active: false, description: 'Auth0 and the GA work together to make the final adjustments to the article.' },
         { title: 'Payment', active: false, description: 'Auth0 pays for the article (in the case of a series, we might wait for the last piece to process the payment).' },
-        { title: 'Publish', active: false, description: 'Auth0 pays for the article (in the case of a series, we might wait for the last piece to process the payment).' },
+        { title: 'Publish', active: false, description: 'Auth0 defines, based on its backlog, a publishing date for the article and informs the author.' },
       ],
     };
     this.selectStep = this.selectStep.bind(this);
@@ -126,11 +128,16 @@ class Authorship extends Component {
     this.setState({
       steps,
     });
+
+    const currentStep = this.state.steps.find((step, idx) => (idx === selectedIdx ? step : null));
+
+    NotificationManager.success(currentStep.description, currentStep.title)
   }
 
   render() {
     return (
       <React.Fragment>
+        <Notification />
         <Profile
           authenticated={this.props.authenticated}
           auth0Client={this.props.auth0Client}
