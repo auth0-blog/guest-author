@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import Arrow from '../components/Arrow';
-import Notification from '../components/Notification/Notification';
 import NotificationManager from '../components/Notification/NotificationManager';
 import Presentation from '../components/Presentation';
 import Profile from '../components/Profile';
@@ -137,7 +136,6 @@ class Authorship extends Component {
   render() {
     return (
       <React.Fragment>
-        <Notification />
         <Profile
           authenticated={this.props.authenticated}
           auth0Client={this.props.auth0Client}

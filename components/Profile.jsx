@@ -4,6 +4,7 @@ import {withRouter} from 'next/router';
 import ContainerArea from './ContentArea';
 import Card from './Card';
 import {DefaultButton} from './Buttons';
+import Notification from './Notification/Notification';
 
 const ProfileCard = Card.extend`
   padding: 10px 30px 10px 30px;
@@ -33,6 +34,7 @@ function Profile(props) {
 
   return (
     <ContainerArea>
+      <Notification />
       {props.authenticated &&
       <ProfileCard>
         <div>
