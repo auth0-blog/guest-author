@@ -100,13 +100,13 @@ export default (WrappedComponent) => {
       if (!this.state.authenticated) return NotificationManager.danger(`Please, log in to apply to the Guest Author program.`);
 
       const email = this.state.email;
-      if (!email || !validator.validate(email)) return NotificationManager.danger(`Please, enter a valid email address.`);
+      if (!email || !validator.validate(email)) return NotificationManager.danger(`Please, enter a valid email address.`, 'Invalid Email');
 
       const userId = auth0Client.getProfile().sub;
       const name = this.state.profile.name;
       this.onboardClient.apply({name, email, userId});
 
-      NotificationManager.success(`Thanks for applying!`);
+      NotificationManager.success(`Thanks for applying!`, 'Done');
     }
 
     toggleCopyright() {
