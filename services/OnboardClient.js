@@ -5,7 +5,7 @@ export default class OnboardClient {
     this.auth0Client = auth0Client;
   }
 
-  apply({ name, email }) {
+  apply({ name, email, userId }) {
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -17,7 +17,7 @@ export default class OnboardClient {
     return fetch('/api/', {
       method: 'POST',
       headers,
-      body: JSON.stringify({ name, email })
+      body: JSON.stringify({ name, email, userId })
     });
   }
 }

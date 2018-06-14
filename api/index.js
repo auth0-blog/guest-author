@@ -52,14 +52,14 @@ async function createApplication(req, res, next) {
   const model = {
     name: req.body.name,
     email: req.body.email,
-    sample: req.body.sample,
+    userId: req.body.userId,
   };
 
   collection.insertOne(model, async (err, result) => {
     if (err) return next(err);
 
     const web = new WebClient(process.env.SLACK_TOKEN);
-    const botMessage = `<!here>, ${req.body.name} just applied to the Guest Author Program with the following email address: ${req.body.email}`;
+    const botMessage = `<!here>, ${req.body.name} just applied to the Guest Author Program with the following email address: ${req.body.email} (\`user_id\` = ${userId}).`;
     const slackRes = await web.chat.postMessage({ channel: process.env.SLACK_CHANNEL, text: botMessage });
 
     res.status(200).send(slackRes.ts);

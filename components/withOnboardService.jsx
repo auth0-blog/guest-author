@@ -1,4 +1,5 @@
 import Auth0Web from 'auth0-web';
+import validator from 'email-validator';
 import {withRouter} from 'next/router';
 import React from 'react';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -6,6 +7,7 @@ import Container from '../components/Container';
 import ContentArea from '../components/ContentArea';
 import CraftedByLogo from '../components/CraftedByLogo';
 import Header from '../components/Header';
+import NotificationManager from '../components/Notification/NotificationManager';
 import config from '../config/auth0';
 import OnboardClient from '../services/OnboardClient';
 
@@ -31,20 +33,24 @@ export default (WrappedComponent) => {
 
       const authenticated = auth0Client.isAuthenticated();
       const profile = authenticated ? auth0Client.getProfile() : null;
+      const email = profile && profile.email ? profile.email : '';
 
       this.state = {
         authenticated,
         profile,
+        email,
         agreeCopyright,
         agreePlagiarism,
       };
 
       auth0Client.subscribe((authenticated) => {
         const profile = authenticated ? auth0Client.getProfile() : null;
+        const email = profile && profile.email ? profile.email : '';
 
         this.setState({
           authenticated,
           profile,
+          email,
         });
 
         if (props.router.pathname === '/callback') props.router.push('/');
@@ -57,6 +63,7 @@ export default (WrappedComponent) => {
       this.apply = this.apply.bind(this);
       this.toggleCopyright = this.toggleCopyright.bind(this);
       this.togglePlagiarism = this.togglePlagiarism.bind(this);
+      this.updateEmail = this.updateEmail.bind(this);
 
       this.pagesOrder = ['/', '/authorship', '/copyright', '/plagiarism', '/agreement', '/payment', '/deadline', '/process', '/application'];
     }
@@ -90,9 +97,16 @@ export default (WrappedComponent) => {
     }
 
     apply() {
-      if (!this.state.authenticated) return;
-      const {name, email} = this.state.profile;
-      this.onboardClient.apply({name, email});
+      if (!this.state.authenticated) return NotificationManager.danger(`Please, log in to apply to the Guest Author program.`);
+
+      const email = this.state.email;
+      if (!email || !validator.validate(email)) return NotificationManager.danger(`Please, enter a valid email address.`);
+
+      const userId = auth0Client.getProfile().sub;
+      const name = this.state.profile.name;
+      this.onboardClient.apply({name, email, userId});
+
+      NotificationManager.success(`Thanks for applying!`);
     }
 
     toggleCopyright() {
@@ -109,8 +123,14 @@ export default (WrappedComponent) => {
       });
     }
 
+    updateEmail(email) {
+      this.setState({
+        email,
+      });
+    }
+
     render() {
-      const {agreeCopyright, agreePlagiarism, authenticated, profile} = this.state;
+      const {agreeCopyright, agreePlagiarism, authenticated, profile, email} = this.state;
       return (
         <Container>
           <Header>
@@ -126,11 +146,13 @@ export default (WrappedComponent) => {
             auth0Client={auth0Client}
             authenticated={authenticated}
             moveForward={this.moveForward}
+            email={email}
             profile={profile}
             stepBack={this.stepBack}
             apply={this.apply}
             toggleCopyright={this.toggleCopyright}
             togglePlagiarism={this.togglePlagiarism}
+            updateEmail={this.updateEmail}
           >
             {this.props.children}
           </WrappedComponent>

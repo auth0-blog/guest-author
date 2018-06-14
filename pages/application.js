@@ -11,8 +11,6 @@ const Input = styled.input`
 `;
 
 function Authorship(props) {
-  const name = props.profile ? props.profile.name : '';
-  const email = props.profile ? props.profile.email : '';
   return (
     <React.Fragment>
       <Profile
@@ -22,7 +20,7 @@ function Authorship(props) {
       />
       <Presentation
         title="Application"
-        action={() => { props.apply(); }}
+        action={props.apply}
         actionLabel="Apply"
         cancel={props.stepBack}
         cancelLabel="Go Back"
@@ -36,12 +34,17 @@ function Authorship(props) {
 
         <p>
           <label htmlFor="name">Name:</label>
-          <Input id="name" type="text" value={name} disabled={true}/>
+          <Input id="name" type="text" value={props.profile ? props.profile.name : ''} disabled={true}/>
         </p>
 
         <p>
           <label htmlFor="email">Email:</label>
-          <Input id="email" type="text" value={email} disabled={true}/>
+          <Input
+            id="email"
+            type="text"
+            onChange={(e) => {props.updateEmail(e.target.value)}}
+            value={props.email} disabled={props.profile && props.profile.email}
+          />
         </p>
       </Presentation>
     </React.Fragment>
