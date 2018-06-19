@@ -1,4 +1,5 @@
 import {withRouter} from 'next/router'
+import deployment from '../config/deployment';
 
 const ActiveLink = ({children, router, href}) => {
   const style = {
@@ -7,11 +8,11 @@ const ActiveLink = ({children, router, href}) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    router.push(href);
+    router.push(deployment.path + href);
   };
 
   return (
-    <a href={href} onClick={handleClick} style={style}>
+    <a href={`${deployment.path}${href}`} onClick={handleClick} style={style}>
       {children}
     </a>
   );
