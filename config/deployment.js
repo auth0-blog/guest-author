@@ -3,7 +3,7 @@ const devConfig = {
 };
 
 const prodConfig = {
-  path: '/prefix'
+  path: '/guest-authors/onboard'
 };
 
 const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
