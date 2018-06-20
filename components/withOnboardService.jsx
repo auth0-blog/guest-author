@@ -11,6 +11,8 @@ import NotificationManager from '../components/Notification/NotificationManager'
 import config from '../config/auth0';
 import OnboardClient from '../services/OnboardClient';
 
+console.log(typeof window !== 'undefined' ? window.location : '');
+
 const baseUrl = typeof window !== 'undefined' ? window.location.href : '';
 
 const auth0Client = new Auth0Web({
