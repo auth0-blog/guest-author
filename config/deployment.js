@@ -1,5 +1,5 @@
 const devConfig = {
-  path: ''
+  path: '/guest-authors/onboard'
 };
 
 const prodConfig = {

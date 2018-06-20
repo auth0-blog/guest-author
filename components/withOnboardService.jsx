@@ -10,10 +10,10 @@ import Header from '../components/Header';
 import NotificationManager from '../components/Notification/NotificationManager';
 import config from '../config/auth0';
 import OnboardClient from '../services/OnboardClient';
+import deployment from '../config/deployment';
 
-console.log(typeof window !== 'undefined' ? window.location : '');
-
-const baseUrl = typeof window !== 'undefined' ? window.location.href : '';
+const origin = typeof window !== 'undefined' ? window.location.origin : '';
+const baseUrl = origin + deployment.path;
 
 const auth0Client = new Auth0Web({
   audience: config.audience,
@@ -55,7 +55,7 @@ export default (WrappedComponent) => {
           email,
         });
 
-        if (props.router.pathname === '/callback') props.router.push('/');
+        if (props.router.pathname === '/callback') props.router.push(baseUrl);
       });
 
       this.onboardClient = new OnboardClient(auth0Client);
@@ -131,6 +131,10 @@ export default (WrappedComponent) => {
       });
     }
 
+    signOut() {
+      auth0Client.signOut(baseUrl);
+    }
+
     render() {
       const {agreeCopyright, agreePlagiarism, authenticated, profile, email} = this.state;
       return (
@@ -152,6 +156,7 @@ export default (WrappedComponent) => {
             profile={profile}
             stepBack={this.stepBack}
             apply={this.apply}
+            signOut={this.signOut}
             toggleCopyright={this.toggleCopyright}
             togglePlagiarism={this.togglePlagiarism}
             updateEmail={this.updateEmail}

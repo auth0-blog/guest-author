@@ -24,10 +24,6 @@ const ProfileCard = Card.extend`
 `;
 
 function Profile(props) {
-  const signOut = () => {
-    props.auth0Client.signOut();
-  };
-
   const profilePicture = (props.authenticated && props.profile.picture) ?
     props.profile.picture :
     'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
@@ -41,7 +37,7 @@ function Profile(props) {
           <img src={profilePicture} alt="Author Profile"/>
           {props.profile.name}
         </div>
-        <DefaultButton onClick={signOut}>Sair</DefaultButton>
+        <DefaultButton onClick={() => props.signOut()}>Sair</DefaultButton>
       </ProfileCard>
       }
     </ContainerArea>

@@ -13,11 +13,7 @@ const ArticleCategory = styled.h3`
 function Authorship(props) {
   return (
     <React.Fragment>
-      <Profile
-        authenticated={props.authenticated}
-        auth0Client={props.auth0Client}
-        profile={props.profile}
-      />
+      <Profile {...props} />
       <Presentation
         title="Payment"
         action={props.moveForward}

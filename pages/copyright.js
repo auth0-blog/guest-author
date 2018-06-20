@@ -6,11 +6,7 @@ import withOnboardService from '../components/withOnboardService';
 function Copyright(props) {
   return (
     <React.Fragment>
-      <Profile
-        authenticated={props.authenticated}
-        auth0Client={props.auth0Client}
-        profile={props.profile}
-      />
+      <Profile {...props} />
       <Presentation
         action={props.moveForward}
         actionLabel="Next"

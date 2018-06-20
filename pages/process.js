@@ -136,11 +136,7 @@ class Authorship extends Component {
   render() {
     return (
       <React.Fragment>
-        <Profile
-          authenticated={this.props.authenticated}
-          auth0Client={this.props.auth0Client}
-          profile={this.props.profile}
-        />
+        <Profile {...this.props} />
         <Presentation
           title="Editorial Process"
           action={this.props.moveForward}

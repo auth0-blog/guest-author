@@ -16,11 +16,7 @@ function index(props) {
   const action = props.authenticated ? props.moveForward : () => {props.auth0Client.signIn()};
   return (
     <React.Fragment>
-      <Profile
-        authenticated={props.authenticated}
-        auth0Client={props.auth0Client}
-        profile={props.profile}
-      />
+      <Profile {...props} />
       <Presentation
         title="Introduction"
         actionLabel={actionLabel}
