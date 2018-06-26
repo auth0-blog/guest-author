@@ -13,7 +13,7 @@ const LogoContainer = styled.div`
 function Logo() {
   return (
     <LogoContainer>
-      <img src="/static/logo-grey.png" alt="Auth0 Logo"/>
+      <img src="./static/logo-grey.png" alt="Auth0 Logo"/>
     </LogoContainer>
   );
 }
